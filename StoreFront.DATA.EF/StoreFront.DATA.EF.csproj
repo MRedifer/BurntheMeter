@@ -83,13 +83,13 @@
     <Compile Include="Category.cs">
       <DependentUpon>BurntheMeterEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>BurntheMeterEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>BurntheMeterEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="metadata\BurntheMeterMetadata.cs" />
     <Compile Include="Platform.cs">
       <DependentUpon>BurntheMeterEntityModel.tt</DependentUpon>
     </Compile>
