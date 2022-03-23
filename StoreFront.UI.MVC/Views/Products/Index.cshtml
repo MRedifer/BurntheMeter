@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -50,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductImage)
+            <img src="~/Content/imgstore/products/t_@item.ProductImage" alt="Product Image" title="@item.ProductName" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CableType.CableTypeName)

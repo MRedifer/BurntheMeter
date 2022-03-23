@@ -14,6 +14,11 @@ namespace StoreFront.UI.MVC.Controllers
     {
         private BurntheMeterEntities db = new BurntheMeterEntities();
 
+        public ActionResult Products()
+        {
+            return View();
+        }
+
         // GET: Platforms
         public ActionResult Index()
         {

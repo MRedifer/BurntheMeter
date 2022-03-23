@@ -182,10 +182,12 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilites\ImageUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\banner_1.jpg" />
@@ -199,6 +201,7 @@
     <Content Include="Content\images\desc_2.jpg" />
     <Content Include="Content\images\desc_3.jpg" />
     <Content Include="Content\images\map_marker.png" />
+    <Content Include="Content\images\NoImage.jpg" />
     <Content Include="Content\images\product_1.png" />
     <Content Include="Content\images\product_10.png" />
     <Content Include="Content\images\product_2.png" />
@@ -386,7 +389,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
@@ -460,7 +462,7 @@
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Products.cshtml" />
     <Content Include="Views\CableTypes\Create.cshtml" />
     <Content Include="Views\CableTypes\Delete.cshtml" />
     <Content Include="Views\CableTypes\Details.cshtml" />
@@ -481,9 +483,13 @@
     <Content Include="Views\StockStatus\Details.cshtml" />
     <Content Include="Views\StockStatus\Edit.cshtml" />
     <Content Include="Views\StockStatus\Index.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\EmailConfirmation.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\imgstore\products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

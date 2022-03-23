@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StoreFront.DATA.EF;
+using StoreFront.UI.MVC.Utilities;
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -51,10 +53,39 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,CategoryID,Price,StockStatusID,PlatformID,CableTypeID,Description,ProductImage")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,CategoryID,Price,StockStatusID,PlatformID,CableTypeID,Description,ProductImage")] Product product, HttpPostedFileBase ProductImage)
         {
             if (ModelState.IsValid)
             {
+
+                #region File Upload
+
+                string file = "NoImage.jpg";
+
+                if (ProductImage != null)
+                {
+                    file = ProductImage.FileName;
+                    string ext = file.Substring(file.LastIndexOf('.'));
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+                    if (goodExts.Contains(ext.ToLower()) && ProductImage.ContentLength <= 4194304)
+                    {
+                        file = Guid.NewGuid() + ext;
+
+                        #region Resize Image
+
+                        string savePath = Server.MapPath("~/Content/imgstore/products/");
+                        Image convertedImage = Image.FromStream(ProductImage.InputStream);
+                        int maxImageSize = 500;
+                        int maxThumbSize = 100;
+                        ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+
+                        #endregion
+                    }
+                    product.ProductImage = file;
+                }
+
+                #endregion
+
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
