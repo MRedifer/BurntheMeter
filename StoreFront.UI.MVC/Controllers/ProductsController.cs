@@ -122,10 +122,41 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,CategoryID,Price,StockStatusID,PlatformID,CableTypeID,Description,ProductImage")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,CategoryID,Price,StockStatusID,PlatformID,CableTypeID,Description,ProductImage")] Product product, HttpPostedFileBase ProductImage)
         {
             if (ModelState.IsValid)
             {
+                #region File Upload
+
+                string file = product.ProductImage;
+                if (ProductImage != null)
+                {
+                    file = ProductImage.FileName;
+                    string ext = file.Substring(file.LastIndexOf('.'));
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+                    if (goodExts.Contains(ext.ToLower()) && ProductImage.ContentLength <= 4194304)
+                    {
+                        file = Guid.NewGuid() + ext;
+                        #region Resize Image
+
+                        string savePath = Server.MapPath("~/Content/imgstore/products/");
+                        Image convertedImage = Image.FromStream(ProductImage.InputStream);
+                        int maxImageSize = 500;
+                        int maxThumbSize = 100;
+                        ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+
+                        #endregion
+                        if (product.ProductImage != null && product.ProductImage != "NoImage.png")
+                        {
+                            string path = Server.MapPath("~/Content/imgstore/products/");
+                            ImageUtility.Delete(path, product.ProductImage);
+                        }
+                        product.ProductImage = file;
+                    }
+                }
+
+                #endregion
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -158,6 +189,10 @@ namespace StoreFront.UI.MVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+
+            string path = Server.MapPath("~/Content/imgstore/products/");
+            ImageUtility.Delete(path, product.ProductImage);
+
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -171,5 +206,12 @@ namespace StoreFront.UI.MVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Products()
+        {
+            var products = db.Products.Include(p => p.CableType).Include(p => p.Category).Include(p => p.Platform).Include(p => p.StockStatu);
+            return View(products.ToList());
+        }
     }
+
 }

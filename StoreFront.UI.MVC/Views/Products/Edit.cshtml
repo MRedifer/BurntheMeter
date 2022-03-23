@@ -5,9 +5,14 @@
 }
 
 <h2>Edit</h2>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
-
-@using (Html.BeginForm("Edit", "Recipients", FormMethod.Post,
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post,
     new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -79,8 +84,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img width="150" src="@Url.Content("~/Content/images/"+Model.ProductImage)" /><br /><br />
-                <input type="file" style="display:inline" name="logo" />
+                <img width="150" src="~/Content/images/@Model.ProductImage" /><br /><br />
+                <input type="file" style="display:inline" name="ProductImage" />
             </div>
         </div>
 

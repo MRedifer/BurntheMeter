@@ -1,5 +1,15 @@
 ﻿@model IEnumerable<StoreFront.DATA.EF.Product>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/bootstrap4/bootstrap.min.css">
+<link href="~/Content/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
+
 <br />
 <br />
 <br />
@@ -12,27 +22,117 @@
     ViewBag.Title = "Products";
 }
 <h2>@ViewBag.Title</h2>
-<div class="row">
-    <div class="col">
-        <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-            @foreach (var item in Model)
-            {
-                <div class="product-item men">
-                    <div class="product discount product_filter">
-                        <div class="product_image">
-                            <img @Html.DisplayFor(modelItem => item.ProductImage)/>
-                        </div>
-                        <div class="favorite favorite_left"></div>
-                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>@Html.DisplayFor(modelItem => item.Price)</span></div>
-                        <div class="product_info">
-                            <h6 class="product_name"><a @Html.ActionLink("Details", "Details", new { id = item.ProductID })>@Html.DisplayFor(modelItem => item.ProductName)</a></h6>
-                            <div class="product_price">@Html.DisplayFor(modelItem => item.Price)</div>
-                        </div>
-                    </div>
-                    <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+
+<div class="">
+    <div class="col product_section clearfix">
+        <div class="breadcrumbs d-flex flex-row align-items-center">
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                <li class="active"><a href="@Url.Action("Products", "Products")"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
+            </ul>
+        </div>
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+            <div class="sidebar_section">
+                <div class="sidebar_title">
+                    <h5>Product Category</h5>
                 </div>
-            }
+                <ul class="sidebar_categories">
+                    <li><a href="#">Men</a></li>
+                    <li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Collection</a></li>
+                    <li><a href="#">Shop</a></li>
+                </ul>
+            </div>
+
+            <!-- Price Range Filtering -->
+            <div class="sidebar_section">
+                <div class="sidebar_title">
+                    <h5>Filter by Price</h5>
+                </div>
+                <p>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+                <div id="slider-range"></div>
+                <div class="filter_button"><span>filter</span></div>
+            </div>
+
+            <!-- Sizes -->
+            <div class="sidebar_section">
+                <div class="sidebar_title">
+                    <h5>Sizes</h5>
+                </div>
+                <ul class="checkboxes">
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
+                    <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
+                </ul>
+            </div>
+
+            <!-- Color -->
+            <div class="sidebar_section">
+                <div class="sidebar_title">
+                    <h5>Color</h5>
+                </div>
+                <ul class="checkboxes">
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
+                    <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                </ul>
+                <div class="show_more">
+                    <span><span>+</span>Show More</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+                    @foreach (var item in Model)
+                    {
+                        <div class="product-item men">
+                            <div class="product discount product_filter">
+                                <div class="product_image">
+                                    <img src="~/Content/imgstore/products/t_@item.ProductImage" alt="Product Image" title="@item.ProductName" />
+                                </div>
+                                <div class="favorite favorite_left"></div>
+                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>@Html.DisplayFor(modelItem => item.Price)</span></div>
+                                <div class="product_info">
+                                    <h6 class="product_name"><a @Html.ActionLink("Details", "Details", new { id = item.ProductID })>@Html.DisplayFor(modelItem => item.ProductName)</a></h6>
+                                    <div class="product_price">@Html.DisplayFor(modelItem => item.Price)</div>
+                                </div>
+                            </div>
+                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+
+
+<script src="~/Scripts/js/jquery-3.2.1.min.js"></script>
+<script src="~/Content/styles/bootstrap4/popper.js"></script>
+<script src="~/Content/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="~/Content/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="~/Content/plugins/easing/easing.js"></script>
+<script src="~/Content/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="~/Scripts/js/categories_custom.js"></script>
