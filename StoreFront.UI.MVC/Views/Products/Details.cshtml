@@ -58,20 +58,19 @@
                 <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
             </ul>
             
-                <p>
-                    @using (Html.BeginForm("AddToCart", "Products", new { @productID = Model.ProductID }, FormMethod.Post, new { @class = "text-center" }))
-                    {
-                        @Html.HiddenFor(x => x.ProductID)
-                        <span class="label" style="color: #000;">Quantity: </span>
-                        @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px; display: inline;" })
-                        <input type="submit" value="Add to Cart" class="btn btn-danger" name="qty" />
-                    }
-                </p>
+            <p>
+                @using (Html.BeginForm("AddToCart", "Products", new { @productID = Model.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+                {
+                    @Html.HiddenFor(x => x.ProductID)
+                    <span class="label" style="color: #000;">Quantity: </span>
+                    @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px; display: inline;" })
+                    <input type="submit" value="Add to Cart" class="btn btn-danger" name="qty" />
+                }
+            </p>
                 <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
             </div>
         </div>
     </div>
-</div>
 
 @*<div>
     <dl class="dl-horizontal">

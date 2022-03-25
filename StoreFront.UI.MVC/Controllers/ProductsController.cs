@@ -249,7 +249,7 @@ namespace StoreFront.UI.MVC.Controllers
                 }
                 Session["cart"] = shoppingCart; 
             }
-            return RedirectToAction("Products", "ShoppingCart");
+            return RedirectToAction("Index", "ShoppingCart");
         }
 
         #endregion

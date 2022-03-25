@@ -198,11 +198,14 @@
     <Content Include="Content\images\blog_1.jpg" />
     <Content Include="Content\images\blog_2.jpg" />
     <Content Include="Content\images\blog_3.jpg" />
+    <Content Include="Content\images\Bnbwhite.jpg" />
     <Content Include="Content\images\deal_ofthe_week.png" />
     <Content Include="Content\images\desc_1.jpg" />
     <Content Include="Content\images\desc_2.jpg" />
     <Content Include="Content\images\desc_3.jpg" />
+    <Content Include="Content\images\FSAD1.png" />
     <Content Include="Content\images\map_marker.png" />
+    <Content Include="Content\images\Neutrik red.jpg" />
     <Content Include="Content\images\NoImage.jpg" />
     <Content Include="Content\images\product_1.png" />
     <Content Include="Content\images\product_10.png" />
@@ -214,6 +217,8 @@
     <Content Include="Content\images\product_7.png" />
     <Content Include="Content\images\product_8.png" />
     <Content Include="Content\images\product_9.png" />
+    <Content Include="Content\images\Ryu.png" />
+    <Content Include="Content\images\ryutransparent.png" />
     <Content Include="Content\images\single_1.jpg" />
     <Content Include="Content\images\single_1_thumb.jpg" />
     <Content Include="Content\images\single_2.jpg" />
@@ -221,6 +226,12 @@
     <Content Include="Content\images\single_3.jpg" />
     <Content Include="Content\images\single_3_thumb.jpg" />
     <Content Include="Content\images\slider_1.jpg" />
+    <Content Include="Content\images\steamdeck.jpg" />
+    <Content Include="Content\images\Surprise.jpg" />
+    <Content Include="Content\images\TightDiamond.jpg" />
+    <Content Include="Content\images\UFB.jpg" />
+    <Content Include="Content\images\Wingman.jpg" />
+    <Content Include="Content\images\woodstick.jpg" />
     <Content Include="Content\plugins\easing\easing.js" />
     <Content Include="Content\plugins\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\plugins\font-awesome-4.7.0\css\font-awesome.min.css" />
