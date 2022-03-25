@@ -11,7 +11,7 @@ namespace StoreFront.DATA.EF //.metadata
     #region Product MetaData
     public class ProductMetaData
     {
-        //public int ProductID { get; set; }
+        public int ProductID { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Can be up to 100 characters")]

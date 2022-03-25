@@ -1,4 +1,6 @@
-﻿@model IEnumerable<StoreFront.DATA.EF.Product>
+﻿
+
+@model IEnumerable<StoreFront.DATA.EF.Product>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/bootstrap4/bootstrap.min.css">
@@ -75,49 +77,24 @@
                 </ul>
             </div>
 
-            <!-- Color -->
-            <div class="sidebar_section">
-                <div class="sidebar_title">
-                    <h5>Color</h5>
-                </div>
-                <ul class="checkboxes">
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
-                    <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-                    <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-                </ul>
-                <div class="show_more">
-                    <span><span>+</span>Show More</span>
-                </div>
-            </div>
-
         </div>
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
                     @foreach (var item in Model)
                     {
-                        <div class="product-item men">
-                            <div class="product discount product_filter">
+                        <div class="product-item men" style="padding:2em">
+                            <div class="product product_filter">
                                 <div class="product_image">
                                     <img src="~/Content/imgstore/products/t_@item.ProductImage" alt="Product Image" title="@item.ProductName" />
                                 </div>
                                 <div class="favorite favorite_left"></div>
-                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>@Html.DisplayFor(modelItem => item.Price)</span></div>
                                 <div class="product_info">
                                     <h6 class="product_name"><a @Html.ActionLink("Details", "Details", new { id = item.ProductID })>@Html.DisplayFor(modelItem => item.ProductName)</a></h6>
                                     <div class="product_price">@Html.DisplayFor(modelItem => item.Price)</div>
                                 </div>
                             </div>
-                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                         </div>
                     }
                 </div>

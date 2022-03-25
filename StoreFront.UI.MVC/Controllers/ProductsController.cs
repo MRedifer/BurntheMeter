@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using StoreFront.DATA.EF;
 using StoreFront.UI.MVC.Utilities;
+using StoreFront.UI.MVC.Models;
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -76,7 +77,7 @@ namespace StoreFront.UI.MVC.Controllers
                         string savePath = Server.MapPath("~/Content/imgstore/products/");
                         Image convertedImage = Image.FromStream(ProductImage.InputStream);
                         int maxImageSize = 500;
-                        int maxThumbSize = 100;
+                        int maxThumbSize = 300;
                         ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
 
                         #endregion
@@ -142,7 +143,7 @@ namespace StoreFront.UI.MVC.Controllers
                         string savePath = Server.MapPath("~/Content/imgstore/products/");
                         Image convertedImage = Image.FromStream(ProductImage.InputStream);
                         int maxImageSize = 500;
-                        int maxThumbSize = 100;
+                        int maxThumbSize = 300;
                         ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
 
                         #endregion
@@ -212,6 +213,46 @@ namespace StoreFront.UI.MVC.Controllers
             var products = db.Products.Include(p => p.CableType).Include(p => p.Category).Include(p => p.Platform).Include(p => p.StockStatu);
             return View(products.ToList());
         }
+
+        #region Custom Add-to-Cart Functionality (Called from Details View)
+
+        public ActionResult AddToCart(int qty, int productID)
+        {
+            Dictionary<int, CartItemViewModel> shoppingCart = null;
+
+            if (Session["cart"] != null)
+            {
+                shoppingCart = (Dictionary<int, CartItemViewModel>)Session["cart"];
+            }
+            else
+            {
+                shoppingCart = new Dictionary<int, CartItemViewModel>();
+            }
+
+
+            Product product = db.Products.Where(b => b.ProductID == productID).FirstOrDefault();
+
+            if (product == null)
+            {
+                return RedirectToAction("Products");
+            }
+            else
+            {
+                CartItemViewModel item = new CartItemViewModel(qty, product);
+                if (shoppingCart.ContainsKey(product.ProductID))
+                {
+                    shoppingCart[product.ProductID].Qty += qty;
+                }
+                else
+                {
+                    shoppingCart.Add(product.ProductID, item);
+                }
+                Session["cart"] = shoppingCart; 
+            }
+            return RedirectToAction("Products", "ShoppingCart");
+        }
+
+        #endregion
     }
 
 }
