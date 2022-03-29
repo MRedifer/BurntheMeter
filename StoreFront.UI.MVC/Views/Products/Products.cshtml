@@ -24,7 +24,6 @@
     ViewBag.Title = "Products";
 }
 <h2>@ViewBag.Title</h2>
-
 <div class="">
     <div class="col product_section clearfix">
         <div class="breadcrumbs d-flex flex-row align-items-center">
@@ -33,44 +32,58 @@
                 <li class="active"><a href="@Url.Action("Products", "Products")"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
             </ul>
         </div>
+    </div>
+</div>
 
-        <!-- Sidebar -->
+<!-- Sidebar -->
 
-        <div class="sidebar">
-            <div class="sidebar_section">
-                <div class="sidebar_title">
-                    <h5>Product Category</h5>
-                </div>
-                <ul class="sidebar_categories">
-                    <li><a href="#">Men</a></li>
-                    <li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Collection</a></li>
-                    <li><a href="#">Shop</a></li>
-                </ul>
+<div class="super_container">
+    <div class="sidebar">
+        <div class="sidebar_section">
+            <div class="sidebar_title">
+                <h5>Product Category</h5>
             </div>
+            <ul class="sidebar_categories">
+                <li>@Html.ActionLink("PS4/PS3/PC", "PlatformsFilter", "Filters", new { platform = "PS4/PS3/PC" }, null)</li>
+                <li>@Html.ActionLink("Xbone/Xbox Series/PC", "PlatformsFilter", "Filters", new { platform = "Xbone/Xbox Series/PC" }, null)</li>
+                <li>@Html.ActionLink("Switch/PC", "PlatformsFilter", "Filters", new { platform = "Switch/PC" }, null)</li>
+            </ul>
         </div>
+        <br />
+        <form method="get" action="/Filters/ProductsQS">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label for="searchFilter">Search by Name</label>
+                </div>
 
-        <div class="row">
-            <div class="col-md-9">
-                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                    @foreach (var item in Model)
-                    {
-                        <div class="product-item men" style="padding:2em">
-                            <div class="product product_filter">
-                                <div class="product_image">
-                                    <img src="~/Content/imgstore/products/t_@item.ProductImage" alt="Product Image" title="@item.ProductName" />
-                                </div>
-                                <div class="favorite favorite_left"></div>
-                                <div class="product_info">
-                                    <h6 class="product_name"><a @Html.ActionLink("Details", "Details", new { id = item.ProductID })>@Html.DisplayFor(modelItem => item.ProductName)</a></h6>
-                                    <div class="product_price">@Html.DisplayFor(modelItem => item.Price)</div>
-                                </div>
+                <div class="col-xs-offset-1 col-xs-11 col-sm-5">
+                    <input type="text" name="searchFilter" />
+                </div>
+                <br />
+                <div class="col-xs-offset-1 col-xs-11 col-sm-2">
+                    <input type="submit" value="Go!" class="btn btn-danger" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+                @foreach (var item in Model)
+                {
+                    <div class="product-item men" style="padding:2em">
+                        <div class="product product_filter">
+                            <div class="product_image">
+                                <img src="~/Content/imgstore/products/t_@item.ProductImage" alt="Product Image" title="@item.ProductName" />
+                            </div>
+                            <div class="favorite favorite_left"></div>
+                            <div class="product_info">
+                                <h6 class="product_name"><a @Html.ActionLink("Details", "Details", new { id = item.ProductID })>@Html.DisplayFor(modelItem => item.ProductName)</a></h6>
+                                <div class="product_price">@Html.DisplayFor(modelItem => item.Price)</div>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

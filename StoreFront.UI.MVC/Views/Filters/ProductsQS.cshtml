@@ -1,0 +1,55 @@
+﻿@model IEnumerable<StoreFront.DATA.EF.Product>
+
+@{
+    ViewBag.Title = "ProductsQS";
+}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h2>ProductsQS</h2>
+<div class="sidebar">
+    <br />
+    <form method="get" action="/Filters/ProductsQS" class="form-horizontal pull-left">
+        <div class="form-group">
+            <div class="col-xs-offset-1 col-xs-11 col-sm-2">
+                <label for="searchFilter">Search by Name</label>
+            </div>
+
+            <div class="col-xs-offset-1 col-xs-11 col-sm-5">
+                <input type="text" name="searchFilter" />
+            </div>
+            <br />
+            <div class="col-xs-offset-1 col-xs-11 col-sm-2">
+                <input type="submit" value="Go!" class="btn btn-danger" />
+            </div>
+        </div>
+    </form>
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row">
+    <div class="col-md-9">
+        <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+            @foreach (var item in Model)
+            {
+                <div class="product-item men" style="padding:2em">
+                    <div class="product product_filter">
+                        <div class="product_image">
+                            <img src="~/Content/imgstore/products/t_@item.ProductImage" alt="Product Image" title="@item.ProductName" />
+                        </div>
+                        <div class="favorite favorite_left"></div>
+                        <div class="product_info">
+                            <h6 class="product_name"><a @Html.ActionLink("Details", "Details", new { id = item.ProductID })>@Html.DisplayFor(modelItem => item.ProductName)</a></h6>
+                            <div class="product_price">@Html.DisplayFor(modelItem => item.Price)</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
