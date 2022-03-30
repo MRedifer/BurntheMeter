@@ -34,7 +34,11 @@
         </div>
     </div>
 </div>
-
+@if (User.IsInRole("Admin"))
+{
+    <a href="@Url.Action("Index", "Products")" class="btn btn-default">Admin View</a>
+}
+<br />
 <!-- Sidebar -->
 
 <div class="super_container">
