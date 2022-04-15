@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -101,7 +101,7 @@
 	}
 	.product_section_container
 	{
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 	.sidebar
 	{

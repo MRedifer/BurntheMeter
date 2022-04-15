@@ -169,6 +169,7 @@ namespace StoreFront.UI.MVC.Controllers
             return View(product);
         }
 
+        #region OriginalDeleteFunctionality
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -198,6 +199,8 @@ namespace StoreFront.UI.MVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
+
 
         protected override void Dispose(bool disposing)
         {

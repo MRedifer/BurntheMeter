@@ -63,7 +63,17 @@
                                     <li class="checkout">
                                         <a href="@Url.Action("Index", "ShoppingCart")">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span id="checkout_items" class="checkout_items"></span>
+                                @{
+                                    Dictionary<int, StoreFront.UI.MVC.Models.CartItemViewModel> products =
+                                        (Dictionary<int, StoreFront.UI.MVC.Models.CartItemViewModel>)Session["cart"];
+
+                                }
+                                @if (Session["cart"] != null && ((Dictionary<int, StoreFront.UI.MVC.Models.CartItemViewModel>)Session["cart"]).Count > 0)
+                                {
+                                    var productCount = products.Sum(p => p.Value.Qty);
+                                            <span id="checkout_items" class="checkout_items">@productCount</span>
+                                            
+                                }
                                         </a>
                                     </li>
                                 </ul>
@@ -88,7 +98,11 @@
                         </a>
                         <ul class="menu_selection">
                             <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                            <li class="nav-item">
                             <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+
+                            </li>
+
                         </ul>
                     </li>
                     <li><a href="@Url.Action("Index", "Home")">home</a></li>
